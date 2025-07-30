@@ -5,15 +5,25 @@ function agregarAmigo(){
         return;
     } else{
         amigos.push(document.getElementById("amigo").value);
-        let lista = document.getElementById("listaAmigos");
-        lista.innerHTML = "";
-        for (let i = 0; i < amigos.length; i++) {
-            lista.innerHTML += amigos[i];
-            if (i < amigos.length - 1) {
-            lista.innerHTML += ", ";
-            }
-        }
+        actualizarAmigo();
         document.getElementById("amigo").value = "";
     }
     
+}
+function actualizarAmigo(){
+    let listaAmigos = document.getElementById("listaAmigos");
+    listaAmigos.innerHTML = "";
+    amigos.forEach(function(amigo) {
+        let li = document.createElement("li");
+        li.textContent = amigo;
+        listaAmigos.appendChild(li);
+    });
+}
+function sortearAmigo(){
+    if (amigos.length === 0) {
+        alert("No hay amigos para sortear.");
+        return;
+    }
+    let amigoSeleccionado = amigos[Math.floor(Math.random() * amigos.length)];
+    document.getElementById("resultado").innerHTML = "El amigo seleccionado es: " + amigoSeleccionado;
 }
